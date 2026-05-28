@@ -17,7 +17,6 @@ const Feed = () => {
         withCredentials: true,
       });
       dispatch(addFeed(feedData.data.feed));
-      console.log("Feed data: ", feedData.data);
     } catch (err) {
       console.error("Error fetching feed: ", err);
     }
@@ -30,7 +29,7 @@ const Feed = () => {
   return (
     <div className="flex justify-around my-10">
       {feed.map((user) => (
-        <UserCard key={user.id} user={user} />
+        <UserCard key={user._id} user={user} />
       ))}
     </div>
   );

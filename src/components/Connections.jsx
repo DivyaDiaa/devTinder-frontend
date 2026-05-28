@@ -16,7 +16,6 @@ const Connections = () => {
         withCredentials: true,
       });
       dispatch(addConnection(response.data.connections));
-      console.log("Connections data: ", response.data.connections);
     } catch (error) {
       console.error("Error fetching connections: ", error);
     }
@@ -30,7 +29,7 @@ const Connections = () => {
     <div className="text-center my-10">
       <h1 className="text-2xl font-bold">Connections</h1>
       {connections.map((connection) => (
-        <UserCard key={connection.id} user={connection} />
+        <UserCard key={connection._id} user={connection} />
       ))}
     </div>
   );
