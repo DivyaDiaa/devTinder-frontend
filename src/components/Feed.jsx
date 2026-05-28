@@ -11,25 +11,27 @@ const Feed = () => {
   const feed = useSelector((store) => store.feed);
 
   const getFeed = async () => {
+    if(feed.length > 0) return;
     try {
       const feedData = await axios.get(BASE_URL + "/feed", {
         withCredentials: true,
       });
-      dispatch(addFeed(feedData));
+      dispatch(addFeed(feedData.data.feed));
+      console.log("Feed data: ", feedData.data);
     } catch (err) {
       console.error("Error fetching feed: ", err);
     }
   };
 
   useEffect(() => {
-    if (!feed) {
       getFeed();
-    }
-  }, [feed]);
+  }, []);
 
   return (
     <div className="flex justify-around my-10">
-      <UserCard feed={feed[0]} />
+      {feed.map((user) => (
+        <UserCard key={user.id} user={user} />
+      ))}
     </div>
   );
 };
