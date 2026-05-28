@@ -19,7 +19,6 @@ const Body = () => {
         withCredentials: true,
       });
       dispatch(addUser(userData.data));
-      console.log("User data: ", userData.data);
     } catch (error) {
       navigate("/login");
       console.error("Error fetching user data: ", error);
