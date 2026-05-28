@@ -7,8 +7,9 @@ import { BASE_URL } from "../utils/constants";
 import { addUser } from "../utils/userSlice";
 
 const Login = () => {
-  const [emailId, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [emailId, setEmail] = useState("diya@gmail.com");
+  const [password, setPassword] = useState("Divya@12");
+  const [error, setError] = useState("");
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -24,10 +25,10 @@ const Login = () => {
         { withCredentials: true },
       );
       dispatch(addUser(response.data));
-
-      navigate("/");
+      navigate("/feed");
     } catch (error) {
       console.error("Error logging in: ", error);
+      setError(error.response?.data?.message || "An error occurred during login.");
     }
   };
 
@@ -62,6 +63,7 @@ const Login = () => {
               />
             </label>
           </div>
+          <p className="text-red-500">{error}</p>
           <div className="card-actions justify-center m-2">
             <button className="btn btn-primary" onClick={handleLogin}>
               Login
